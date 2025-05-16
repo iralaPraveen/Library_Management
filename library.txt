@@ -1,0 +1,5 @@
+101|The Alchemist|Paulo Coelho|issued|Alice (2025-05-16)|
+102|Atomic Habits|James Clear|issued|Praveen (2025-05-10)|
+103|Clean Code|Robert Martin|issued|Alice|2025-05-16 23:57:41
+104|Rich Dad Poor Dad|Robert Kiyosaki|available||
+105|Zero to One|Peter Thiel|issued|Ramesh (2025-05-05)|
