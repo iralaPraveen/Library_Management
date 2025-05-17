@@ -1,6 +1,62 @@
-101|The Alchemist|Paulo Coelho|issued|Alice (2025-05-16)|
-102|Atomic Habits|James Clear|issued|Praveen (2025-05-10)|
-103|Clean Code|Robert Martin|issued|Alice|2025-05-16 23:57:41
-104|Rich Dad Poor Dad|Robert Kiyosaki|available||
-105|Zero to One|Peter Thiel|issued|Ramesh (2025-05-05)|
-102|praveen reddu|dinesh|available||
+1|Steve Jobs|Walter Issacson|available||
+2|Discovery of India|Jawaharlal Nehru|available||
+3|My Experiments with Truth|Mahatma Gandhi|available||
+4|Object Oriented Programming with C++|E Balagurusamy|available||
+5|Thinking with type|Ellen Lupton|available||
+6|The Photographer's|Lindsay Adler|available||
+7|Think and Grow|Napoleon Hill|available||
+8|The Fifth Discipline : The Art|Peter M.Senge|available||
+9|A Theory of Justice|John Rawls|available||
+10|Eat to Live|Joel Fuhrman|available||
+11|City of Heavenly Fire|Cassandra Clare|available||
+12|Da Vinci Code|Dan Brown|available||
+13|War and Peace|Leo Tolstoy|available||
+14|Python For All|John Shovic|available||
+15|Automate The Boring Stuff With Python|Al Sweigart|available||
+16|Wings Of Fire|APJ Abdul Kalam|available||
+17|Ikigai|Hector Garcia|available||
+18|Who Will Cry When You Will Die|Robin Sharma|available||
+19|Rich Dad Poor Dad|Robert T. Kiyosaki|available||
+20|Immortals of Meluha|Amish Tirpathi|available||
+21|A Brief History Of Time|Stephen Hawking|issued|kalim|2025-05-17 22:47:09
+22|I Know Why The Cage Bird Sings|Maya Anguelo|available||
+23|Lord Of Files|William Golding|available||
+24|Loara Dune|R. D Blackmore|available||
+25|Jamacia Inn|Daphne|available||
+26|Kidnapped|Robert Louis|available||
+27|Treasure Island|Robert Louis|available||
+28|The Call Of Wild|Jack London|available||
+29|Charlottes Web|E. B White|available||
+30|The Wind In Willows|Kenneth Grahame|available||
+31|Being and Time|Martin Heldegger|available||
+32|The Republic|Rocha Pereia|available||
+33|Critique For Pure Reason|Paul Guyer|available||
+34|The Prince|Rufus Godwin|available||
+35|Ethics|Stuart Hampshire|available||
+36|Long Walk To Freedom|Nelson Mandela|available||
+37|The Dairy Of Young Girl|Anne Frank|available||
+38|Mark Twain|Mark Twain|available||
+39|Mein Kampf|Adolf Hitler|available||
+40|Freakonomics|Steveb D.Levit|available||
+41|Thinking Fast and Slow|Daniel Kahneman|available||
+42|Tell You About Capitalism|HA-Joon Chang|available||
+43|Animal Spirits|Akerlof and Shiller|available||
+44|The Black Swan|Nassim Nicholas Taleb|available||
+45|1984|George Orwell|available||
+46|The Lord Of Wings|J.R.R.Tolken|available||
+47|Kite Runner|Khaled Hosseini|available||
+48|Harry Potter|J.K.Rowling|available||
+49|The Book Theif|Markus Zusak|available||
+50|History Of 20th Century|Martin Gilbert|available||
+51|Guns,Germs,and Steel|Jared Daimond|available||
+52|A World lit Only by Fire|William Manchestar|available||
+53|The Crusades|Thomas Asbridge|available||
+54|Over The Edge Of The World|Laurence|available||
+55|A Beautiful Mind|Sylvia Nasar|available||
+56|The Enigma|Andrew Hodges|available||
+57|Alexander Hamilton|Ron Chernow|available||
+58|Barracoon|Zora Neale Hurston|available||
+59|CHURCHILL : A Life|MArtin Glibert|available||
+60|A Tale of Two Cities|Charles Dickens|issued|yukesh|2025-05-17 22:45:54
+61|Les Misérables|Victor Hugo|available||
+62|praveen|praveen reddy|available||
