@@ -1,5 +1,6 @@
 import os
 from datetime import datetime
+from tabulate import tabulate
 
 class Library:
     def __init__(self, filename="library.txt"):
@@ -13,8 +14,6 @@ class Library:
             with open(self.filename, "r") as f:
                 for line in f:
                     parts = line.strip().split("|")
-                    # Expecting 6 parts: id|title|author|status|borrower|issued_date
-                    # If file doesn't have issued_date (old format), handle gracefully
                     if len(parts) == 6:
                         self.books.append({
                             "id": parts[0],
@@ -40,16 +39,24 @@ class Library:
                 f.write(f"{b['id']}|{b['title']}|{b['author']}|{b['status']}|{b['borrower']}|{b['issued_date']}\n")
 
     def show_books(self):
-        print("\nAvailable Books:")
-        for b in self.books:
-            if b["status"] == "available":
-                print(f"{b['id']} - {b['title']} by {b['author']}")
+        available = [b for b in self.books if b["status"] == "available"]
+        if not available:
+            print("\n📕 No books available.\n")
+            return
+        headers = ["ID", "Title", "Author"]
+        rows = [[b["id"], b["title"], b["author"]] for b in available]
+        print("\n📚 Available Books:")
+        print(tabulate(rows, headers=headers, tablefmt="grid"))
 
     def show_issued_books(self):
-        print("\nIssued Books:")
-        for b in self.books:
-            if b["status"] == "issued":
-                print(f"{b['id']} - {b['title']} by {b['author']} | Borrower: {b['borrower']} | Issued on: {b['issued_date']}")
+        issued = [b for b in self.books if b["status"] == "issued"]
+        if not issued:
+            print("\n📙 No books issued.\n")
+            return
+        headers = ["ID", "Title", "Author", "Borrower", "Issued On"]
+        rows = [[b["id"], b["title"], b["author"], b["borrower"], b["issued_date"]] for b in issued]
+        print("\n📕 Issued Books:")
+        print(tabulate(rows, headers=headers, tablefmt="grid"))
 
     def add_book(self):
         bid = input("Enter Book ID: ")
@@ -99,6 +106,7 @@ class Library:
 
 def main():
     lib = Library()
+    print("📖 Welcome to the Library Management System")
     while True:
         print("\n📚 LIBRARY MENU")
         print("1. Show available books")
@@ -123,7 +131,7 @@ def main():
         elif choice == "6":
             lib.remove_book()
         elif choice == "7":
-            print("👋 Exiting...")
+            print("👋 Exiting... Goodbye!")
             break
         else:
             print("❌ Invalid choice.")
