@@ -14,22 +14,13 @@ class Library:
             with open(self.filename, "r") as f:
                 for line in f:
                     parts = line.strip().split("|")
-                    if len(parts) == 6:
+                    if len(parts) >= 3:
                         self.books.append({
                             "id": parts[0],
                             "title": parts[1],
                             "author": parts[2],
-                            "status": parts[3].lower(),
-                            "borrower": parts[4],
-                            "issued_date": parts[5]
-                        })
-                    elif len(parts) == 5:
-                        self.books.append({
-                            "id": parts[0],
-                            "title": parts[1],
-                            "author": parts[2],
-                            "status": parts[3].lower(),
-                            "borrower": parts[4],
+                            "status": "available",
+                            "borrower": "",
                             "issued_date": ""
                         })
 
@@ -37,6 +28,13 @@ class Library:
         with open(self.filename, "w") as f:
             for b in self.books:
                 f.write(f"{b['id']}|{b['title']}|{b['author']}|{b['status']}|{b['borrower']}|{b['issued_date']}\n")
+
+    def log_activity(self, message):
+        with open("log.txt", "a") as log:
+            log.write(f"{datetime.now()} - {message}\n")
+
+    def is_unique_id(self, bid):
+        return all(b["id"] != bid for b in self.books)
 
     def show_books(self):
         available = [b for b in self.books if b["status"] == "available"]
@@ -46,6 +44,15 @@ class Library:
         headers = ["ID", "Title", "Author"]
         rows = [[b["id"], b["title"], b["author"]] for b in available]
         print("\n📚 Available Books:")
+        print(tabulate(rows, headers=headers, tablefmt="grid"))
+
+    def show_all_books(self):
+        if not self.books:
+            print("\n📘 No books in library.\n")
+            return
+        headers = ["ID", "Title", "Author", "Status"]
+        rows = [[b["id"], b["title"], b["author"], b["status"]] for b in self.books]
+        print("\n📚 All Books:")
         print(tabulate(rows, headers=headers, tablefmt="grid"))
 
     def show_issued_books(self):
@@ -58,8 +65,26 @@ class Library:
         print("\n📕 Issued Books:")
         print(tabulate(rows, headers=headers, tablefmt="grid"))
 
+    def check_overdue_books(self):
+        overdue = []
+        for b in self.books:
+            if b["status"] == "issued" and b["issued_date"]:
+                issued_date = datetime.strptime(b["issued_date"], '%Y-%m-%d %H:%M:%S')
+                if (datetime.now() - issued_date).days > 7:
+                    overdue.append(b)
+        if overdue:
+            headers = ["ID", "Title", "Borrower", "Issued Date"]
+            rows = [[b["id"], b["title"], b["borrower"], b["issued_date"]] for b in overdue]
+            print("\n🔔 Overdue Books:")
+            print(tabulate(rows, headers=headers, tablefmt="grid"))
+        else:
+            print("\n✅ No overdue books.")
+
     def add_book(self):
         bid = input("Enter Book ID: ")
+        if not self.is_unique_id(bid):
+            print("❌ Book ID already exists.")
+            return
         title = input("Enter Book Title: ")
         author = input("Enter Author: ")
         self.books.append({
@@ -68,6 +93,7 @@ class Library:
         })
         self.save_books()
         print("✅ Book added.")
+        self.log_activity(f"Book '{title}' (ID: {bid}) added.")
 
     def issue_book(self):
         bid = input("Enter Book ID to issue: ")
@@ -79,6 +105,7 @@ class Library:
                 b["issued_date"] = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
                 self.save_books()
                 print("✅ Book issued.")
+                self.log_activity(f"Book '{b['title']}' (ID: {bid}) issued to {name}.")
                 return
         print("❌ Book not found or already issued.")
 
@@ -86,6 +113,7 @@ class Library:
         bid = input("Enter Book ID to return: ")
         for b in self.books:
             if b["id"] == bid and b["status"] == "issued":
+                self.log_activity(f"Book '{b['title']}' (ID: {bid}) returned by {b['borrower']}.")
                 b["status"] = "available"
                 b["borrower"] = ""
                 b["issued_date"] = ""
@@ -101,8 +129,19 @@ class Library:
         self.save_books()
         if len(self.books) < before:
             print("✅ Book removed.")
+            self.log_activity(f"Book (ID: {bid}) removed.")
         else:
             print("❌ Book ID not found.")
+
+    def search_book(self):
+        query = input("Enter title, author, or ID to search: ").lower()
+        results = [b for b in self.books if query in b["id"].lower() or query in b["title"].lower() or query in b["author"].lower()]
+        if results:
+            headers = ["ID", "Title", "Author", "Status"]
+            rows = [[b["id"], b["title"], b["author"], b["status"]] for b in results]
+            print(tabulate(rows, headers=headers, tablefmt="grid"))
+        else:
+            print("❌ No matching books found.")
 
 def main():
     lib = Library()
@@ -111,11 +150,14 @@ def main():
         print("\n📚 LIBRARY MENU")
         print("1. Show available books")
         print("2. Show issued books")
-        print("3. Add new book")
-        print("4. Issue book")
-        print("5. Return book")
-        print("6. Remove book")
-        print("7. Exit")
+        print("3. Show all books")
+        print("4. Add new book")
+        print("5. Issue book")
+        print("6. Return book")
+        print("7. Remove book")
+        print("8. Search for a book")
+        print("9. Check overdue books")
+        print("10. Exit")
         choice = input("Enter choice: ")
 
         if choice == "1":
@@ -123,14 +165,20 @@ def main():
         elif choice == "2":
             lib.show_issued_books()
         elif choice == "3":
-            lib.add_book()
+            lib.show_all_books()
         elif choice == "4":
-            lib.issue_book()
+            lib.add_book()
         elif choice == "5":
-            lib.return_book()
+            lib.issue_book()
         elif choice == "6":
-            lib.remove_book()
+            lib.return_book()
         elif choice == "7":
+            lib.remove_book()
+        elif choice == "8":
+            lib.search_book()
+        elif choice == "9":
+            lib.check_overdue_books()
+        elif choice == "10":
             print("👋 Exiting... Goodbye!")
             break
         else:
