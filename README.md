@@ -18,7 +18,12 @@ Go to the project directory
   cd Library_Management
 ```
 
-Install dependencies
+
+## Requirements
+
+- Python 3.13.x is required for this project.
+- Install dependencies with:
+
 
 ```bash
   create a vitual environment either pipenv or pyenv.
