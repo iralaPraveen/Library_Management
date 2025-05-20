@@ -148,9 +148,9 @@ def main():
     print("📖 Welcome to the Library Management System")
     while True:
         print("\n📚 LIBRARY MENU")
-        print("1. Show available books")
+        print("1. Show all books")
         print("2. Show issued books")
-        print("3. Show all books")
+        print("3. Show status of all books")
         print("4. Add new book")
         print("5. Issue book")
         print("6. Return book")
